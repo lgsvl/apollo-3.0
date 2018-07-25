@@ -1,16 +1,14 @@
 FROM apolloauto/apollo:dev-x86_64-20180702_1140
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get install -y autoconf \
-   autoconf \
-   libtool \
-   pkg-config \
-   python \
-   libxext-dev \
-   x11proto-gl-dev \
-   mesa-utils
-
+RUN DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y autoconf \
+       autoconf \
+       libtool \
+       pkg-config \
+       python \
+       libxext-dev \
+       x11proto-gl-dev \
+       mesa-utils
 
 WORKDIR /opt/libglvnd
 RUN git clone --branch=v1.0.0 https://github.com/NVIDIA/libglvnd.git . && \
@@ -35,5 +33,3 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,graphics,utility
 ENV NVIDIA_VISIBLE_DEVICES all
 
 WORKDIR /apollo
-
-
