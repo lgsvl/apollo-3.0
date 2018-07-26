@@ -33,3 +33,44 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,graphics,utility
 ENV NVIDIA_VISIBLE_DEVICES all
 
 WORKDIR /apollo
+RUN mkdir glfw && \
+    cd glfw && \
+    wget https://github.com/glfw/glfw/archive/3.2.1.tar.gz && \
+    tar -xf 3.2.1.tar.gz && \
+    cd glfw-3.2.1 && \
+    cmake . -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF -DBUILD_SHARED_LIBS=ON && \ 
+    make && \
+    make install
+
+# may not be needed if not already installed
+RUN apt remove -y libglfw3 libglfw3-dev
+
+RUN mkdir glew && cd glew && \
+    wget https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.tgz/download &&\
+    tar -xf download && \
+    cd glew-2.1.0 && \
+    cd include && \
+    mkdir KHR && \
+    cd KHR && \
+    wget https://www.khronos.org/registry/EGL/api/KHR/khrplatform.h && \
+    cd .. && \
+    mkdir EGL && \
+    cd EGL && \
+    wget https://www.khronos.org/registry/EGL/api/EGL/eglplatform.h && \
+    cd ../.. && \
+    make && \
+    GLEW_DEST=/usr/local SYSTEM=linux-egl make install
+
+RUN rm /usr/lib/libGLEW* /usr/lib64/libGLEW*
+
+ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib64
+
+# dependencies for rosbridge
+RUN pip install --upgrade empy \
+    mangopy \
+    zope.interface
+
+RUN touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
+
+WORKDIR /apollo
+
