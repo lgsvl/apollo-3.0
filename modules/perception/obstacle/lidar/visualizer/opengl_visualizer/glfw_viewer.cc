@@ -128,7 +128,7 @@ bool GLFWViewer::WindowInit() {
     AERROR << "Failed to initialize glfw !\n";
     return false;
   }
-
+  glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
   window_ = glfwCreateWindow(win_width_, win_height_, "opengl_visualizer",
                              nullptr, nullptr);
   if (window_ == nullptr) {

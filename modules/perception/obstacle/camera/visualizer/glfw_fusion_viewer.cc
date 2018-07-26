@@ -291,6 +291,7 @@ bool GLFWFusionViewer::window_init() {
   // window_ = glfwCreateWindow(win_width_, win_height_, "opengl_visualizer",
   // nullptr, nullptr);
   // glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+  glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
   win_width_ = scene_width_ + image_width_;
   win_height_ =
       (image_height_ * 2 > win_height_) ? image_height_ * 2 : win_height_;
