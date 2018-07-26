@@ -741,7 +741,7 @@ function main() {
   DEFINES="--define ARCH=${MACHINE_ARCH} --define CAN_CARD=${CAN_CARD} --cxxopt=-DUSE_ESD_CAN=${USE_ESD_CAN}"
 
   if [ ${MACHINE_ARCH} == "x86_64" ]; then
-    DEFINES="${DEFINES} --copt=-mavx2"
+    DEFINES="${DEFINES} --copt=-mavx"
   fi
 
   local cmd=$1

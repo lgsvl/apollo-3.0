@@ -44,7 +44,7 @@ namespace apollo {
 namespace perception {
 namespace traffic_light {
 
-#ifdef __USE_AVX__
+#ifdef __USE_AVX2__
 template <bool align>
 SIMD_INLINE void YuvSeperateAvx2(uint8_t *y, __m256i *y0, __m256i *y1,
                                  __m256i *u0, __m256i *v0) {
