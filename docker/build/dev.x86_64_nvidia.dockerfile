@@ -68,7 +68,9 @@ ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib64
 # dependencies for rosbridge
 RUN pip install --upgrade empy \
     mangopy \
-    zope.interface
+    zope.interface \
+    pillow \
+    twisted
 
 RUN touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 
