@@ -74,5 +74,23 @@ RUN pip install --upgrade empy \
 
 RUN touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 
+# compile and include libpcl without avx2
+COPY patch/libpcl.patch /tmp/
+RUN cd /apollo && \
+    git clone https://github.com/PointCloudLibrary/pcl.git && \
+    cd pcl && \
+    git checkout -b 1.7.2 pcl-1.7.2 && \
+    patch -i /tmp/libpcl.patch
+
+RUN cd /apollo/pcl && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j8 && \
+    cp -a lib/* /usr/local/lib/ && \
+    ldconfig
+
+RUN rm -rf /apollo/pcl
+
 WORKDIR /apollo
 
