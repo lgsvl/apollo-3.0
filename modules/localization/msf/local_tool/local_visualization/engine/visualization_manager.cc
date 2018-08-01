@@ -389,7 +389,8 @@ void VisualizationManager::DoVisualize() {
           lidar_frame.timestamp, &fusion_loc, 0);
 
       if (!lidar_query_success && !fusion_query_success) {
-        continue;
+        // APOLLO-SVL temp disable
+        //continue;
       }
 
       LocalizatonInfo lidar_loc_info;

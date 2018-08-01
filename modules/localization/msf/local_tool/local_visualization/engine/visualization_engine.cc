@@ -166,7 +166,9 @@ void VisualizationEngine::Visualize(
   if (!UpdateCarLocId(expected_car_loc_id_)) {
     if (!UpdateCarLocId(car_loc_id_)) {
       if (!UpdateCarLocId()) {
-        return;
+        AERROR << "VisualizationEngine::Visualize - error!" << loc_infos[0].location.x() << loc_infos[1].location.x() << loc_infos[2].location.x();
+        // APOLLO-SVL temp disable
+        //return;
       }
     } else {
       if (expected_car_loc_id_ == loc_info_num_) {

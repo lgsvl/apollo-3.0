@@ -343,7 +343,8 @@ void LocalizationLidarProcess::UpdateState(const int ret, const double time) {
     // check covariance
     double cur_location_std_area = std::sqrt(location_covariance_(0, 0)) *
                                    std::sqrt(location_covariance_(1, 1));
-    if (cur_location_std_area > unstable_threshold_) {
+    // APOLLO-SVL temp disable
+    if ( false /*cur_location_std_area > unstable_threshold_*/) {
       ++unstable_count_;
     } else {
       unstable_count_ = 0;

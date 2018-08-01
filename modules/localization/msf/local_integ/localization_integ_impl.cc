@@ -335,7 +335,8 @@ void LocalizationIntegImpl::ImuProcessImpl(const ImuData& imu_data) {
 
   if (state != IntegState::NOT_INIT) {
     // pass result of integration localization to lidar process module
-    if (enable_lidar_localization_ && state != IntegState::NOT_STABLE) {
+    if (enable_lidar_localization_ /* APOLLO-SVL temp disable: && state != IntegState::NOT_STABLE */) {
+
       lidar_process_->IntegPvaProcess(integ_sins_pva);
     }
 

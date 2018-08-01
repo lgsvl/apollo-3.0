@@ -4,8 +4,8 @@ leverarm:
   primary:
     offset:
       x: 0.00
-      y: 1.10866
-      z: 1.14165
+      y: 0.00
+      z: 1.0
     uncertainty:
       x: 0.05
       y: 0.05
