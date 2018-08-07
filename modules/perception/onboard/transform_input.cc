@@ -33,7 +33,7 @@ bool GetVelodyneTrans(const double query_time, Eigen::Matrix4d* trans) {
     return false;
   }
 
-  ros::Time query_stamp(query_time);
+  ros::Time query_stamp = ros::Time(0);  // ros::Time query_stamp(query_time);
   const auto& tf2_buffer = common::adapter::AdapterManager::Tf2Buffer();
 
   const double kTf2BuffSize = FLAGS_tf2_buff_in_ms / 1000.0;
