@@ -124,6 +124,7 @@ void PointCloudUpdater::UpdatePointCloud(const PointCloud2 &point_cloud) {
 
 void PointCloudUpdater::FilterPointCloud(
     pcl::PointCloud<pcl::PointXYZ>::Ptr pcl_ptr) {
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ> ());
   pcl::VoxelGrid<pcl::PointXYZ> voxel_grid;
   voxel_grid.setInputCloud(pcl_ptr);
   voxel_grid.setLeafSize(FLAGS_voxel_filter_size, FLAGS_voxel_filter_size,
