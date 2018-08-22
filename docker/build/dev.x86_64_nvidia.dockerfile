@@ -33,21 +33,22 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,graphics,utility
 ENV NVIDIA_VISIBLE_DEVICES all
 
 WORKDIR /apollo
+
 RUN mkdir glfw && \
     cd glfw && \
-    wget https://github.com/glfw/glfw/archive/3.2.1.tar.gz && \
-    tar -xf 3.2.1.tar.gz && \
+    wget -O - https://github.com/glfw/glfw/archive/3.2.1.tar.gz | tar -xz && \
     cd glfw-3.2.1 && \
     cmake . -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_DOCS=OFF -DBUILD_SHARED_LIBS=ON && \ 
     make && \
-    make install
+    make install && \
+    cd /apollo && \
+    rm -rf glfw-3.2.1
 
 # may not be needed if not already installed
 RUN apt remove -y libglfw3 libglfw3-dev
 
 RUN mkdir glew && cd glew && \
-    wget https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.tgz/download &&\
-    tar -xf download && \
+    wget -O - https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0.tgz/download | tar -xz && \
     cd glew-2.1.0 && \
     cd include && \
     mkdir KHR && \
@@ -59,7 +60,9 @@ RUN mkdir glew && cd glew && \
     wget https://www.khronos.org/registry/EGL/api/EGL/eglplatform.h && \
     cd ../.. && \
     make && \
-    GLEW_DEST=/usr/local SYSTEM=linux-egl make install
+    GLEW_DEST=/usr/local SYSTEM=linux-egl make install && \
+    cd /apollo && \
+    rm -rf glew-2.1.0
 
 RUN rm /usr/lib/libGLEW* /usr/lib64/libGLEW*
 
@@ -76,21 +79,19 @@ RUN touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 
 # compile and include libpcl without avx2
 COPY patch/libpcl.patch /tmp/
-RUN cd /apollo && \
-    git clone https://github.com/PointCloudLibrary/pcl.git && \
-    cd pcl && \
-    git checkout -b 1.7.2 pcl-1.7.2 && \
-    patch -i /tmp/libpcl.patch
 
-RUN cd /apollo/pcl && \
+RUN wget -O - https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.2.tar.gz | tar -xz && \
+    cd pcl-pcl-1.7.2 && \
+    patch -i /tmp/libpcl.patch && \
     mkdir build && \
     cd build && \
-    cmake .. && \
-    make -j8 && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release && \
+    make -j`nproc` && \
     cp -a lib/* /usr/local/lib/ && \
-    ldconfig
+    ldconfig && \
+    cd /apollo && \
+    rm -rf pcl-pcl-1.7.2
 
-RUN rm -rf /apollo/pcl
-
-WORKDIR /apollo
-
+RUN rm -rf /home/tmp/ros/lib/python2.7/dist-packages/numpy && \
+    /usr/local/miniconda2/bin/conda install -y matplotlib && \
+    /usr/local/miniconda2/bin/conda install -y -c menpo opencv
