@@ -15,6 +15,7 @@ export default class PointCloud {
     constructor() {
         this.points = null;
         this.initialized = false;
+        this.vehicleName = "";
     }
 
     initialize() {
@@ -43,6 +44,10 @@ export default class PointCloud {
         const points = new THREE.Points(geometry, material);
         points.frustumCulled = false;
         return points;
+    }
+
+    updateVehicle(vehicleName) {
+        this.vehicleName = vehicleName;
     }
 
     update(pointCloud, adcMesh) {
@@ -86,6 +91,8 @@ export default class PointCloud {
         this.points.geometry.verticesNeedUpdate = true;
         this.points.geometry.colorsNeedUpdate = true;
         this.points.position.set(adcMesh.position.x, adcMesh.position.y, adcMesh.position.z);
-        this.points.rotation.set(0, 0, adcMesh.rotation.y);
+        const rotation = this.vehicleName.startsWith("LG SVL") ?
+            adcMesh.rotation.y - Math.PI / 2 : adcMesh.rotation.y;
+        this.points.rotation.set(0, 0, rotation);
     }
 }

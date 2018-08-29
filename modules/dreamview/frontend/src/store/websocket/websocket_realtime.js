@@ -43,6 +43,7 @@ export default class RosWebSocketEndpoint {
                 case "HMIStatus":
                     STORE.hmi.updateStatus(message.data);
                     RENDERER.updateGroundImage(STORE.hmi.currentMap);
+                    RENDERER.updateVehicle(STORE.hmi.currentVehicle);
                     break;
                 case "VehicleParam":
                     STORE.hmi.updateVehicleParam(message.data);

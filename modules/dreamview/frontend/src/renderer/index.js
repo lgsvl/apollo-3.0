@@ -358,6 +358,10 @@ class Renderer {
         this.ground.updateImage(mapName);
     }
 
+    updateVehicle(vehicleName) {
+        this.pointCloud.updateVehicle(vehicleName);
+    }
+
     updateGroundMetadata(serverUrl, mapInfo) {
         this.ground.initialize(serverUrl, mapInfo);
     }
