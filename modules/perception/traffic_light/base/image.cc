@@ -63,6 +63,8 @@ bool Image::GenerateMat() {
         mat_ = cv::Mat(image_data_->height, image_data_->width, CV_8UC3);
         Yuyv2rgb(yuv, mat_.data, image_data_->height * image_data_->width);
         cv::cvtColor(mat_, mat_, CV_RGB2BGR);
+      } else {
+        mat_ = cv_bridge::toCvCopy(image_data_, sensor_msgs::image_encodings::BGR8)->image;
       }
 
       contain_mat_ = true;
