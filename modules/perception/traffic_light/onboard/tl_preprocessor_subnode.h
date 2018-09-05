@@ -80,9 +80,11 @@ class TLPreprocessorSubnode : public Subnode {
 
   // @brief sub long focus camera
   void SubLongFocusCamera(const sensor_msgs::Image &msg);
+  void SubLongCompressedFocusCamera(const sensor_msgs::CompressedImage& msg);
 
   // @brief sub short focus camera
   void SubShortFocusCamera(const sensor_msgs::Image &msg);
+  void SubShortCompressedFocusCamera(const sensor_msgs::CompressedImage& msg);
 
   void SubCameraImage(boost::shared_ptr<const sensor_msgs::Image> msg,
                       CameraId camera_id);

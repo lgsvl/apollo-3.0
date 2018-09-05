@@ -77,6 +77,7 @@ class CameraProcessSubnode : public Subnode {
   bool InitModules();
 
   void ImgCallback(const sensor_msgs::Image& message);
+  void ImgCompressedCallback(const sensor_msgs::CompressedImage& message);
   void ChassisCallback(const apollo::canbus::Chassis& message);
 
   bool MessageToMat(const sensor_msgs::Image& msg, cv::Mat* img);

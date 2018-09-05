@@ -32,7 +32,6 @@ using apollo::common::adapter::AdapterManager;
 
 constexpr double ImageHandler::kImageScale;
 
-template <>
 void ImageHandler::OnImage(const sensor_msgs::Image &image) {
   if (requests_ == 0) {
     return;
@@ -59,21 +58,28 @@ void ImageHandler::OnImage(const sensor_msgs::Image &image) {
   cvar_.notify_all();
 }
 
-template <>
-void ImageHandler::OnImage(const sensor_msgs::CompressedImage &image) {
+void ImageHandler::OnImageCompressed(const sensor_msgs::CompressedImage &image) {
   if (requests_ == 0) {
     return;
   }
 
-  try {
+  if (image.format == "jpeg") {
+      std::unique_lock<std::mutex> lock(mutex_);
+      send_buffer_.assign(image.data.begin(), image.data.end());
+      cvar_.notify_all();
+  } else {
+    cv_bridge::CvImagePtr current_image;
+    try {
+      current_image = cv_bridge::toCvCopy(image);
+    } catch (cv_bridge::Exception &e) {
+      AERROR << "Error when converting ROS image to CV image: " << e.what();
+      return;
+    }
+
     std::unique_lock<std::mutex> lock(mutex_);
-    auto current_image = cv_bridge::toCvCopy(image);
     cv::imencode(".jpg", current_image->image, send_buffer_,
                  std::vector<int>() /* params */);
     cvar_.notify_all();
-  } catch (cv_bridge::Exception &e) {
-    AERROR << "Error when converting ROS image to CV image: " << e.what();
-    return;
   }
 }
 
@@ -89,9 +95,23 @@ void ImageHandler::OnImageShort(const sensor_msgs::Image &image) {
   }
 }
 
+void ImageHandler::OnImageFrontCompressed(const sensor_msgs::CompressedImage &image) {
+  if (FLAGS_use_navigation_mode) {
+    OnImageCompressed(image);
+  }
+}
+
+void ImageHandler::OnImageShortCompressed(const sensor_msgs::CompressedImage &image) {
+  if (!FLAGS_use_navigation_mode) {
+    OnImageCompressed(image);
+  }
+}
+
 ImageHandler::ImageHandler() : requests_(0) {
   AdapterManager::AddImageFrontCallback(&ImageHandler::OnImageFront, this);
   AdapterManager::AddImageShortCallback(&ImageHandler::OnImageShort, this);
+  AdapterManager::AddImageFrontCompressedCallback(&ImageHandler::OnImageFrontCompressed, this);
+  AdapterManager::AddImageShortCompressedCallback(&ImageHandler::OnImageShortCompressed, this);
 }
 
 bool ImageHandler::handleGet(CivetServer *server, struct mg_connection *conn) {

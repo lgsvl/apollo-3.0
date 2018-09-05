@@ -53,11 +53,14 @@ class ImageHandler : public CivetHandler {
   bool handleGet(CivetServer *server, struct mg_connection *conn);
 
  private:
-  template <typename SensorMsgsImage>
-  void OnImage(const SensorMsgsImage &image);
+  void OnImage(const sensor_msgs::Image &image);
+  void OnImageCompressed(const sensor_msgs::CompressedImage &image);
 
   void OnImageFront(const sensor_msgs::Image &image);
   void OnImageShort(const sensor_msgs::Image &image);
+
+  void OnImageFrontCompressed(const sensor_msgs::CompressedImage &image);
+  void OnImageShortCompressed(const sensor_msgs::CompressedImage &image);
 
   std::vector<uchar> send_buffer_;
   std::atomic<int> requests_;

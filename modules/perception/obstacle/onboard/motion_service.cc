@@ -45,6 +45,7 @@ bool MotionService::InitInternal() {
   vehicle_planemotion_ = new PlaneMotion(motion_buffer_size_);
 
   AdapterManager::AddImageFrontCallback(&MotionService::ImageCallback, this);
+  AdapterManager::AddImageFrontCompressedCallback(&MotionService::ImageCompressedCallback, this);
 
   CHECK(shared_data_manager_ != NULL);
   camera_shared_data_ = dynamic_cast<CameraSharedData*>(
@@ -56,6 +57,13 @@ bool MotionService::InitInternal() {
   AINFO << "init MotionService success.";
   return true;
 }
+
+void MotionService::ImageCompressedCallback(const sensor_msgs::CompressedImage &message) {
+  sensor_msgs::Image image;
+  image.header = message.header;
+  ImageCallback(image); // NOTE: only header timestamp used from ROS message
+}
+
 void MotionService::ImageCallback(const sensor_msgs::Image& message) {
   double curr_timestamp = message.header.stamp.toSec();
   ADEBUG << "motion received image : " << GLOG_TIMESTAMP(curr_timestamp)

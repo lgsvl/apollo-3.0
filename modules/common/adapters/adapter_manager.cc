@@ -156,12 +156,15 @@ void AdapterManager::Init(const AdapterManagerConfig &configs) {
         break;
       case AdapterConfig::IMAGE_FRONT:
         EnableImageFront(FLAGS_image_front_topic, config);
+        EnableImageFrontCompressed(FLAGS_image_short_topic + "/compressed", config); // NOTE: simulator sends jpeg's only on "image_short" topic
         break;
       case AdapterConfig::IMAGE_SHORT:
         EnableImageShort(FLAGS_image_short_topic, config);
+        EnableImageShortCompressed(FLAGS_image_short_topic + "/compressed", config);
         break;
       case AdapterConfig::IMAGE_LONG:
         EnableImageLong(FLAGS_image_long_topic, config);
+        EnableImageLongCompressed(FLAGS_image_long_topic + "/compressed", config);
         break;
       case AdapterConfig::CAMERA_IMAGE_LONG:
         EnableCameraImageLong(FLAGS_camera_image_long_topic, config);

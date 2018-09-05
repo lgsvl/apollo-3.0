@@ -19,6 +19,8 @@
 #include "modules/perception/traffic_light/base/image_lights.h"
 #include "ros/ros.h"
 #include "sensor_msgs/Image.h"
+#include "sensor_msgs/CompressedImage.h"
+#include "cv_bridge/cv_bridge.h"
 
 using apollo::perception::PerceptionObstacles;
 using apollo::perception::traffic_light::CameraId;
@@ -38,7 +40,8 @@ std::vector<std::shared_ptr<Image>> g_cached_images;
 const int kMaxCachedImageNum = 10;
 
 void OnPerception(const PerceptionObstacles &);
-void OnImageShort(sensor_msgs::ImagePtr);
+static void OnImageShort(sensor_msgs::ImagePtr);
+static void OnImageShortCompressed(sensor_msgs::CompressedImagePtr);
 
 int main(int argc, char **argv) {
   google::InitGoogleLogging(argv[0]);
@@ -50,6 +53,8 @@ int main(int argc, char **argv) {
       n.subscribe(FLAGS_perception_obstacle_topic, 1000, OnPerception);
   ros::Subscriber sub_tl_image_short =
       n.subscribe(FLAGS_image_short_topic, 1000, OnImageShort);
+  ros::Subscriber sub_tl_image_short_compressed =
+      n.subscribe(FLAGS_image_short_topic + "/compressed", 1000, OnImageShortCompressed);
 
   ros::spin();
   return 0;
@@ -85,4 +90,9 @@ void OnImage(CameraId camera_id, sensor_msgs::ImagePtr msg) {
 
 void OnImageShort(sensor_msgs::ImagePtr msg) {
   OnImage(CameraId::SHORT_FOCUS, msg);
+}
+
+void OnImageShortCompressed(sensor_msgs::CompressedImagePtr msg) {
+  auto image = cv_bridge::toCvCopy(msg, "bgr8");
+  OnImageShort(image->toImageMsg());
 }

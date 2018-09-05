@@ -51,8 +51,11 @@ bool CameraProcessSubnode::InitInternal() {
 
   InitModules();
 
-  AdapterManager::AddImageFrontCallback(&CameraProcessSubnode::ImgCallback,
-                                        this);
+  AdapterManager::AddImageFrontCallback(
+    &CameraProcessSubnode::ImgCallback, this);
+  AdapterManager::AddImageFrontCompressedCallback(
+    &CameraProcessSubnode::ImgCompressedCallback, this);
+
   if (pb_obj_) {
     AdapterManager::AddChassisCallback(&CameraProcessSubnode::ChassisCallback,
                                        this);
@@ -99,6 +102,16 @@ bool CameraProcessSubnode::InitModules() {
   filter_->Init();
 
   return true;
+}
+
+void CameraProcessSubnode::ImgCompressedCallback(const sensor_msgs::CompressedImage& message) {
+
+  cv_bridge::CvImagePtr image = cv_bridge::toCvCopy(message, "bgr8");
+
+  sensor_msgs::Image msg;
+  image->toImageMsg(msg);
+
+  ImgCallback(msg);
 }
 
 void CameraProcessSubnode::ImgCallback(const sensor_msgs::Image &message) {

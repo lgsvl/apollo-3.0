@@ -62,10 +62,14 @@ bool TLPreprocessorSubnode::InitInternal() {
       << "TLPreprocessorSubnode init failed.ImageLong is not initialized.";
   AdapterManager::AddImageLongCallback(
       &TLPreprocessorSubnode::SubLongFocusCamera, this);
+  AdapterManager::AddImageLongCompressedCallback(
+      &TLPreprocessorSubnode::SubLongCompressedFocusCamera, this);
   CHECK(AdapterManager::GetImageShort())
       << "TLPreprocessorSubnode init failed.ImageShort is not initialized.";
   AdapterManager::AddImageShortCallback(
       &TLPreprocessorSubnode::SubShortFocusCamera, this);
+  AdapterManager::AddImageShortCompressedCallback(
+      &TLPreprocessorSubnode::SubShortCompressedFocusCamera, this);
   return true;
 }
 
@@ -143,6 +147,20 @@ void TLPreprocessorSubnode::SubShortFocusCamera(const sensor_msgs::Image &msg) {
   AdapterManager::Observe();
   SubCameraImage(AdapterManager::GetImageShort()->GetLatestObservedPtr(),
                  SHORT_FOCUS);
+  PERF_FUNCTION("SubShortFocusCamera");
+}
+
+void TLPreprocessorSubnode::SubLongCompressedFocusCamera(const sensor_msgs::CompressedImage& msg) {
+  AdapterManager::Observe();
+  auto image = cv_bridge::toCvCopy(AdapterManager::GetImageLongCompressed()->GetLatestObservedPtr(), "bgr8");
+  SubCameraImage(image->toImageMsg(), LONG_FOCUS);
+  PERF_FUNCTION("SubLongFocusCamera");
+}
+
+void TLPreprocessorSubnode::SubShortCompressedFocusCamera(const sensor_msgs::CompressedImage &msg) {
+  AdapterManager::Observe();
+  auto image = cv_bridge::toCvCopy(AdapterManager::GetImageShortCompressed()->GetLatestObservedPtr(), "bgr8");
+  SubCameraImage(image->toImageMsg(), SHORT_FOCUS);
   PERF_FUNCTION("SubShortFocusCamera");
 }
 

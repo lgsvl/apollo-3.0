@@ -57,6 +57,7 @@ class MotionService : public Subnode {
  private:
   void OnLocalization(const localization::LocalizationEstimate &localization);
   void ImageCallback(const sensor_msgs::Image &message);
+  void ImageCompressedCallback(const sensor_msgs::CompressedImage &message);
   void PublishEvent(double timestamp);
   PlaneMotion *vehicle_planemotion_ = nullptr;
   std::string device_id_;
