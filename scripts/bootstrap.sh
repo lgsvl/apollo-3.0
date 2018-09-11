@@ -26,48 +26,33 @@ ulimit -c unlimited
 source "${DIR}/apollo_base.sh"
 
 function start() {
-    DEBUG_MODE="yes"
+    # Setup supervisord.
     if [ "$HOSTNAME" == "in_release_docker" ]; then
-        DEBUG_MODE="no"
+        supervisord -c /apollo/modules/tools/supervisord/release.conf >& /tmp/supervisord.start.log
+        echo "Started supervisord with release conf"
+    else
+        supervisord -c /apollo/modules/tools/supervisord/dev.conf >& /tmp/supervisord.start.log
+        echo "Started supervisord with dev conf"
     fi
 
     # Start roscore.
     bash scripts/roscore.sh start
-
-    if [ "$DEBUG_MODE" == "yes" ]; then
-        ./scripts/monitor.sh start
-        ./scripts/dreamview.sh start
-    else
-        # Use supervisord.
-        supervisord -c /apollo/modules/tools/supervisord/release.conf >& /tmp/supervisord.start.log
-        echo "Started supervisord with release conf"
-
-        # Start monitor.
-        supervisorctl start monitor > /dev/null
-        # Start dreamview.
-        supervisorctl start dreamview
-        supervisorctl status dreamview | grep RUNNING > /dev/null
-    fi
-
+    # Start monitor.
+    supervisorctl start monitor > /dev/null
+    # Start dreamview.
+    bash scripts/voice_detector.sh start
+    supervisorctl start dreamview
+    supervisorctl status dreamview | grep RUNNING > /dev/null
     if [ $? -eq 0 ]; then
         echo "Dreamview is running at http://localhost:8888"
     fi
 }
 
 function stop() {
-    DEBUG_MODE="yes"
-    if [ "$HOSTNAME" == "in_release_docker" ]; then
-        DEBUG_MODE="no"
-    fi
-
     # Stop modules in reverse order of the starting procedure.
-    if [ "$DEBUG_MODE" == "yes" ]; then
-        ./scripts/dreamview.sh stop
-        ./scripts/monitor.sh stop
-    else
-        supervisorctl stop dreamview
-        supervisorctl stop monitor
-    fi
+    supervisorctl stop dreamview
+    bash scripts/voice_detector.sh stop
+    supervisorctl stop monitor
     source scripts/roscore.sh stop
 }
 
