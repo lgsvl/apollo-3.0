@@ -256,6 +256,8 @@ function main(){
     docker pull ${YOLO3D_VOLUME_IMAGE}
     docker run -it -d --rm --name ${YOLO3D_VOLUME} ${YOLO3D_VOLUME_IMAGE}
 
+    ROS_DOMAIN_ID=`python -c "import random; print(random.getrandbits(31))"`
+
     info "Starting docker container \"apollo_dev\" ..."
 
     DOCKER_CMD="nvidia-docker"
@@ -277,6 +279,7 @@ function main(){
         -e DOCKER_GRP="$GRP" \
         -e DOCKER_GRP_ID=$GRP_ID \
         -e DOCKER_IMG=$IMG \
+        -e ROS_DOMAIN_ID=$ROS_DOMAIN_ID \
         $(local_volumes) \
         --net host \
         -w /apollo \

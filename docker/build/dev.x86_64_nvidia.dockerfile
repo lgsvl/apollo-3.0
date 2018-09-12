@@ -95,3 +95,7 @@ RUN wget -O - https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.2.tar.gz 
 RUN rm -rf /home/tmp/ros/lib/python2.7/dist-packages/numpy && \
     /usr/local/miniconda2/bin/conda install -y matplotlib && \
     /usr/local/miniconda2/bin/conda install -y -c menpo opencv
+
+# we DO NOT want ROS_DOMAIN_ID set to part of IP address that potentially can match somebody else
+RUN sed -i.bak -e '95d' /home/tmp/ros/share/catkin/cmake/templates/setup.sh.in \
+ && sed -i.bak -e '95d' /home/tmp/ros/setup.sh
