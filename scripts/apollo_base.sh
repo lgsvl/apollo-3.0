@@ -330,11 +330,22 @@ function stop_customized_path() {
   MODULE_PATH=$1
   MODULE=$2
 
-  pkill -SIGKILL -f "modules/${MODULE_PATH}/${MODULE}"
+  # first try to send "Ctrl+C" to process for graceful cleanup
+  pkill -SIGINT -f "modules/${MODULE_PATH}/${MODULE}"
+  sleep 1
+
+  # is it still alive after 1 second?
+  pkill -f "modules/${MODULE_PATH}/${MODULE}"
   if [ $? -eq 0 ]; then
-    echo "Successfully stopped module ${MODULE}."
+    # terminate process without giving it ability to clean up
+    pkill -SIGKILL -f "modules/${MODULE_PATH}/${MODULE}"
+    if [ $? -eq 0 ]; then
+      echo "Successfully KILLED module ${MODULE}."
+    else
+      echo "Module ${MODULE} is not running - skipping."
+    fi
   else
-    echo "Module ${MODULE} is not running - skipping."
+    echo "Successfully stopped module ${MODULE}."
   fi
 }
 
