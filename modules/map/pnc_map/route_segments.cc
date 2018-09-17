@@ -331,13 +331,13 @@ bool RouteSegments::CanDriveFrom(const LaneWaypoint &waypoint) const {
   const double kLaneSeparationDistance = 0.3;
   if (route_sl.l() < 0) {  // waypoint at right side
     if (dist >
-        waypoint_left_width + segment_right_width + kLaneSeparationDistance) {
+        waypoint_left_width + segment_right_width + kLaneSeparationDistance + 0.4) {
       AERROR << "waypoint is too far to reach: " << dist;
       return false;
     }
   } else {  // waypoint at left side
     if (dist >
-        waypoint_right_width + segment_left_width + kLaneSeparationDistance) {
+        waypoint_right_width + segment_left_width + kLaneSeparationDistance + 0.4) {
       AERROR << "waypoint is too far to reach: " << dist;
       return false;
     }
