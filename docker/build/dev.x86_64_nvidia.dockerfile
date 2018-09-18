@@ -69,8 +69,8 @@ RUN rm /usr/lib/libGLEW* /usr/lib64/libGLEW*
 ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib64
 
 # dependencies for rosbridge
-RUN pip install --upgrade empy \
-    mangopy \
+RUN pip install --upgrade \
+    pymongo \
     zope.interface \
     pillow \
     twisted
@@ -78,11 +78,12 @@ RUN pip install --upgrade empy \
 RUN touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 
 # compile and include libpcl without avx2
-COPY patch/libpcl.patch /tmp/
+COPY patch/*.patch /tmp/
 
-RUN wget -O - https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.2.tar.gz | tar -xz && \
+RUN wget -q -O - https://github.com/PointCloudLibrary/pcl/archive/pcl-1.7.2.tar.gz | tar -xz && \
     cd pcl-pcl-1.7.2 && \
     patch -i /tmp/libpcl.patch && \
+    patch -p 1 -i /tmp/remove_native_march.patch && \
     mkdir build && \
     cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release && \
