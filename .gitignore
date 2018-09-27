@@ -94,3 +94,9 @@ docs/demo_guide/*.bag
 # Rosbridge build files
 ros_pkgs/devel
 ros_pkgs/build
+
+ros_pkgs/src/**/*.pyo
+modules/localization/testdata/simulator_sf_map
+
+# Apollo Platform
+apollo-platform/
