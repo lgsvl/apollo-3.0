@@ -1,3 +1,6 @@
 [submodule "ros_pkgs/src/rosbridge_suite"]
 	path = ros_pkgs/src/rosbridge_suite
 	url = ../rosbridge_suite.git
+[submodule "modules/map/data/san_francisco"]
+	path = modules/map/data/san_francisco
+	url = ../apollo-simulator-map.git
