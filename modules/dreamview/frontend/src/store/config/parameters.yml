@@ -35,6 +35,14 @@ ground:
     yorigin: 4140800
     type: default # default or tile
     tileRange: 4
+  san_francisco:
+    mpp: 0.125
+    xres: 7168
+    yres: 10240
+    xorigin: 590528
+    yorigin: 4140160
+    type: default # default or tile
+    tileRange: 4
 planning:
   # The minimum interval between two consecutive
   minInterval: 0.1
