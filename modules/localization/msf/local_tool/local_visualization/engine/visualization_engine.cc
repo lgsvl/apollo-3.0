@@ -670,6 +670,27 @@ void VisualizationEngine::GenerateMutiResolutionImages(
     step = nstep;
   }
 
+  // Generate one large png for the whole map
+  cv::Mat xlarge((x_max - x_min + 1) * 1024, (y_max - y_min + 1) * 1024,
+                 CV_8UC3, cv::Scalar(0, 0, 0));
+
+  char ss[200];
+  for (pt_x = x_min; pt_x < x_max; pt_x++) {
+    for (pt_y = y_min; pt_y < y_max; pt_y++) {
+      snprintf(ss, sizeof(ss), "%s/%08d/%08d_0.png",
+               image_visual_path_dst.c_str(), pt_y,
+               pt_x);
+      if (apollo::common::util::PathExists(ss)) {
+          cv::Mat img = cv::imread(ss);
+          img.copyTo(xlarge(cv::Rect( (pt_x-x_min) * 1024, (pt_y-y_min) * 1024, 1024, 1024)));
+      }
+    }
+  }
+
+  snprintf(ss, sizeof(ss), "%s/xlarge_map.png",
+           image_visual_path_dst.c_str());
+  cv::imwrite(ss, xlarge);
+
   // write param
   std::fstream outf(dst_folder + "/param.txt", std::ios::out);
   outf << x_min << " " << y_min << std::endl;
