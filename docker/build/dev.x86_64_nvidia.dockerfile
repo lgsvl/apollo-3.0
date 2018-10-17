@@ -1,4 +1,4 @@
-FROM apolloauto/apollo:dev-x86_64-20180702_1140
+FROM apolloauto/apollo:dev-x86_64-20180906_2002
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get install -y autoconf \
@@ -76,6 +76,7 @@ RUN pip install --upgrade \
     twisted
 
 RUN touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
+RUN touch /usr/local/lib/python2.7/dist-packages/google/__init__.py
 
 # compile and include libpcl without avx2
 COPY patch/*.patch /tmp/
