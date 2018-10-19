@@ -1,0 +1,3 @@
+[submodule "ros_pkgs/src/rosbridge_suite"]
+	path = ros_pkgs/src/rosbridge_suite
+	url = ../rosbridge_suite.git
