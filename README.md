@@ -1,254 +1,125 @@
-![image alt text](docs/demo_guide/images/Apollo_logo.png)
-
-[![Build Status](https://travis-ci.com/ApolloAuto/apollo.svg?branch=master)](https://travis-ci.com/ApolloAuto/apollo) [![Simulation Status](https://azure.apollo.auto/dailybuildstatus.svg)](https://azure.apollo.auto/dailybuild)
-
-```
-
-We choose to go to the moon in this decade and do the other things,
-
-not because they are easy, but because they are hard.
-
--- John F. Kennedy, 1962
-
-```
-
-Welcome to Apollo's GitHub page!
-
-[Apollo](http://apollo.auto) is a high performance, flexible architecture which accelerates the development, testing, and deployment of Autonomous Vehicles.
-
-For business and partnership, please visit [our website](http://apollo.auto).
+# LG Silicon Valley Lab Apollo Fork
+This repository is a fork of [Apollo](https://github.com/ApolloAuto/apollo) maintained by the LG Electronics Silicon Valley Lab which has modified and configured to facilitate use with [LG's Automotive Simulator](https://github.com/lgsvl/simulator).
 
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
 2. [Prerequisites](#prerequisites)
-    - [Basic Requirements](#basic-requirements)
-    - [Individual Version Requirements](#individual-version-requirements)
-3. [Architecture](#architecture)
-4. [Installation](#installation)
-5. [Documents](#documents)
-
-
+3. [Setup](#setup)
+    - [Docker](#docker)
+    - [Cloning the Repository](#cloning-the-repository)
+    - [Building Apollo and Rosbridge](#building-apollo-and-rosbridge)
+4. [Launching Apollo Alongside the Simulator](#launching-apollo-alongside-the-simulator)
 
 ## Getting Started
-
-**The Apollo Team now proudly presents to you the latest [version 3.0](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_3_0_quick_start.md).**
-
-
- Apollo 3.0 is loaded with new modules and features, but needs to be calibrated and configured perfectly before you take it for a spin. Please review the prerequisites and installation steps in detail to ensure that you are well equipped to build and launch Apollo. You could also check out Apollo's architecture overview for a greater understanding on Apollo's core technology and platform. 
-
-[Want to contribute to our code?](https://github.com/ApolloAuto/apollo/blob/master/CONTRIBUTING.md) follow this guide.
+The guide outlines the steps required to setup Apollo for use with the LG Automotive Simulator. If you have not already set up the simulator, please do so first by following the instructions [here](https://github.com/lgsvl/simulator).
 
 ## Prerequisites
-
-#### Basic Requirements:
-
-* Vehicle equipped with by-wire system, including but not limited to brake by-wire, steering by-wire, throttle by-wire and shift by-wire (Apollo is currently tested on Lincoln MKZ)
-
-* A machine with a 4-core processor and 6GB memory minimum
-
-* Ubuntu 14.04
-
-* Working knowledge of Docker
+* Linux operating system (preferably Ubuntu 14.04 or later)
+* Nvidia graphics card (required for Perception)
+    - Nvidia proprietary driver must be installed
+    - The current version of Apollo does not support Volta and Turing architectures (this includes Titan V and RTX 2080 GPUs).
+   
 
 
- - Please note, it is recommended that you install the versions of Apollo in the following order: 
- **1.0 > 1.5 > 2.0 > 2.5 > 3.0**.
- The reason behind this recommendation is that you need to confirm whether individual hardware components 
- and modules are functioning correctly and clear various version test cases,
- before progressing to a higher more capable version for your safety and the safety of those around you.
+## Setup
 
- - Please note, if you do not have a vehicle, proceed to the [Installation - Without Hardware](#without-hardware) 
+### Docker
+Apollo is designed to run out of docker containers. The image will mount this repository as a volume so the image will not need to be rebuilt each time a modification is made.
 
+#### Installing Docker CE
+To install Docker CE please refer to the [official documentation](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+We also suggest following through with the [post installation steps](https://docs.docker.com/install/linux/linux-postinstall/).
 
-#### Individual Version Requirements:
-
-The following diagram highlights the scope and features of each Apollo release:
-
-![](https://github.com/ApolloAuto/apollo/blob/master/docs/demo_guide/images/apollo_versions_3.png)
-
-[**Apollo 1.0:**](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_1_0_hardware_system_installation_guide.md) 
-
-Apollo 1.0 also referred to as the Automatic GPS Waypoint Following, works in an enclosed venue such as a test track or parking lot. This installation is necessary to ensure that Apollo works perfectly with your vehicle. The diagram below lists the various modules in Apollo 1.0.
-
-![image alt text](docs/demo_guide/images/Apollo_1.png)
-
-**For Setup:**
-
-* **Hardware**:
-
-    * Industrial PC (IPC)
-
-    * Global Positioning System (GPS)
-
-    * Inertial Measurement Unit (IMU)
-
-    * Controller Area Network (CAN) card
-
-    * Hard drive
-
-    * GPS Antenna
-
-    * GPS Receiver
-
-* **Software**:
-
-    * Apollo Linux Kernel (based on Linux Kernel 4.4.32)
-
-[**Apollo 1.5:**](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_1_5_hardware_system_installation_guide.md) 
-
-Apollo 1.5 is meant for fixed lane cruising. With the addition of LiDAR, vehicles with this version now have better perception of its surroundings and can better map its current position and plan its trajectory for safer maneuvering on its lane. Please note, the modules highlighted in Yellow are additions or upgrades for version 1.5.
-
-![image alt text](docs/demo_guide/images/Apollo_1_5.png)	
-
-**For Setup:**
-
-* All the requirements mentioned in version 1.0
-
-* **Hardware**:
-
-    * Light Detection and Ranging System (LiDAR)
-
-    * ASUS GTX1080 GPU-A8G- Gaming GPU Card
-
-* **Software**:
-
-    * Nvidia GPU Driver
-
-[**Apollo 2.0:**](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_2_0_hardware_system_installation_guide_v1.md#key-hardware-components)
-
-Apollo 2.0 supports vehicles autonomously driving on simple urban roads. Vehicles are able to cruise on roads safely, avoid collisions with obstacles, stop at traffic lights and change lanes if needed to reach their destination.  Please note, the modules highlighted in Red are additions or upgrades for version 2.0.
-
-![image alt text](docs/demo_guide/images/Apollo_2.png)
-
-**For Setup:**
-
-* All the requirements mentioned in versions 1.5 and 1.0
-
-* **Hardware**:
-
-    * Traffic Light Detection using Camera
-
-    * Ranging System (LiDAR)
-
-    * Radar
-
-* **Software**:
-
-    * Same as 1.5
-
-[**Apollo 2.5:**](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_2_5_hardware_system_installation_guide_v1.md)
-
-Apollo 2.5 allows the vehicle to autonomously run on geo-fenced highways with a camera for obstacle detection. Vehicles are able to maintain lane control, cruise and avoid collisions with vehicles ahead of them. 
-
+#### Installing Nvidia Docker
+Before installing nvidia-docker make sure that you have an appropriate Nvidia driver installed.
+To test if nvidia drivers are properly installed enter `nvidia-smi` in a terminal. If the drivers are installed properly an output similar to the following should appear.
 ```
-Please note, if you need to test Apollo 2.5; for safety purposes, please seek the help of the
-Apollo Engineering team. Your safety is our #1 priority,
-and we want to ensure Apollo 2.5 was integrated correctly with your vehicle before you hit the road. 
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 390.87                 Driver Version: 390.87                    |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |===============================+======================+======================|
+    |   0  GeForce GTX 108...  Off  | 00000000:65:00.0  On |                  N/A |
+    |  0%   59C    P5    22W / 250W |   1490MiB / 11175MiB |      4%      Default |
+    +-------------------------------+----------------------+----------------------+
+                                                                                
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                       GPU Memory |
+    |  GPU       PID   Type   Process name                             Usage      |
+    |=============================================================================|
+    |    0      1187      G   /usr/lib/xorg/Xorg                           863MiB |
+    |    0      3816      G   /usr/bin/gnome-shell                         305MiB |
+    |    0      4161      G   ...-token=7171B24E50C2F2C595566F55F1E4D257    68MiB |
+    |    0      4480      G   ...quest-channel-token=3330599186510203656   147MiB |
+    |    0     17936      G   ...-token=5299D28BAAD9F3087B25687A764851BB   103MiB |
+    +-----------------------------------------------------------------------------+
 ```
 
-![image alt text](docs/demo_guide/images/Apollo_2_5.png)
+The installation steps for nvidia-docker are available at the [official repo](https://github.com/NVIDIA/nvidia-docker). 
 
-**For Setup:**
+#### Pulling LGSVL Docker image
+LGSVL maintains a docker image to be used alongside this repository. The docker image is available [here](https://hub.docker.com/r/lgsvl/apollo/).
 
-* All the requirements mentioned in 2.0
+To pull the image use the following command:
 
-* Hardware:
+    docker pull lgsvl/apollo
 
-    * Additional Camera
+### Cloning the Repository
+This repository includes a couple of submodules for HD Maps and rosbrige. To make sure that the submodules are also cloned use the following command:
 
-* Software: 
-
-    * Same as 2.0
-
-[**Apollo 3.0:**](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_3_0_quick_start.md)
-
-Apollo 3.0's main focus is to provide a platform for developers to build upon in a closed venue low-speed environment. Vehicles are able to maintain lane control, cruise and avoid collisions with vehicles ahead of them. 
-
-![image alt text](docs/demo_guide/images/Apollo_3.0_diagram.png)
-
-**For Setup:**
-
-* Hardware:
-
-    * Ultrasonic sensors
-    * Apollo Sensor Unit
-    * Apollo Hardware Development Platform with additional sensor support and flexibility
-
-* Software: 
-
-    * Guardian
-    * Monitor
-    * Additional drivers to support Hardware
-
-## Architecture
-
-* **Hardware/ Vehicle Overview**
-
-![image alt text](docs/demo_guide/images/Hardware_overview.png)
-
-* **Hardware Connection Overview**
-
-![image alt text](docs/demo_guide/images/Hardware_connection.png)
-
-* **Software Overview - Navigation Mode**
-
-![image alt text](docs/specs/images/Apollo_3.0_SW.png)
-
-## Installation
-
-* [Fork and then Clone Apollo's GitHub code](https://github.com/ApolloAuto/apollo) 
-
-* [Build and Release using Docker](https://github.com/ApolloAuto/apollo/blob/master/docs/howto/how_to_build_and_release.md) - This step is required
-
-* [Launch and Run Apollo](https://github.com/ApolloAuto/apollo/blob/master/docs/howto/how_to_launch_Apollo.md)
-
-If at this point, you do not have a Hardware setup, please go to [Without Hardware](#without-hardware). 
-
-### With Hardware:
-
-* [Apollo 1.0 QuickStart Guide](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_1_0_quick_start.md)
-
-* [Apollo 1.5 QuickStart Guide](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_1_5_quick_start.md)
-
-* [Apollo 2.0 QuickStart Guide](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_2_0_quick_start.md)
-
-* [Apollo 2.5 QuickStart Guide](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_2_5_quick_start.md)
-
-* [Apollo 3.0 QuickStart Guide](https://github.com/ApolloAuto/apollo/blob/master/docs/quickstart/apollo_3_0_quick_start.md)
-
-### Without Hardware:
-
-* [How to Build Apollo ](https://github.com/ApolloAuto/apollo/tree/master/docs/demo_guide)
-
-## Documents
-
-* [Technical Tutorial](https://github.com/ApolloAuto/apollo/tree/master/docs/technical_tutorial): Everything you need to know about Apollo. Written as individual versions with links to every document related to that version.
-
-* [HowTo](https://github.com/ApolloAuto/apollo/tree/master/docs/howto): Brief technical solutions to common problems that developers face during the installation and use of the Apollo platform 
-
-* [Specs](https://github.com/ApolloAuto/apollo/tree/master/docs/specs): A Deep dive into Apollo's Hardware and Software specifications (only recommended for expert level developers that have successfully installed and launched Apollo) 
-
-* [FAQs](https://github.com/ApolloAuto/apollo/tree/master/docs/FAQs) 
-
-## Questions
-
-You are welcome to submit questions and bug reports as [GitHub Issues](https://github.com/ApolloAuto/apollo/issues).
-
-## Copyright and License
-
-Apollo is provided under the [Apache-2.0 license](https://github.com/natashadsouza/apollo/blob/master/LICENSE).
-
-## Disclaimer
-
-Please refer the Disclaimer of Apollo in [Apollo's official website](http://apollo.auto/docs/disclaimer.html).
-
-## Connect with us 
-* [Have suggestions for our GitHub page?](https://github.com/ApolloAuto/apollo/issues)
-* [Twitter](https://twitter.com/apolloplatform)
-* [YouTube](https://www.youtube.com/channel/UC8wR_NX_NShUTSSqIaEUY9Q)
-* [Blog](https://www.medium.com/apollo-auto)
-* [Newsletter](http://eepurl.com/c-mLSz)
-* Interested in our turnKey solutions or partnering with us Mail us at: apollopartner@baidu.com
+    git clone --recurse-submodules git@github.com:lgsvl/apollo.git
 
 
+### Building Apollo and rosbridge
+Now everything should be in place to build apollo. Apollo must be built from the container. To launch the container navigate to the directory where the repository was cloned and enter:
+
+    ./docker/scripts/dev_start.sh
+
+This should launch the container and mount a few volumes. It could take a few minutes to pull the latest volumes on the first run.
+
+To get into the container:
+
+    ./docker/scripts/dev_into.sh
+
+Build Apollo:
+
+    ./apollo.sh build_gpu
+
+(optional) to build without gpu:
+
+    ./apollo.sh build
+
+Now build rosbrige:
+
+    cd ros_pkgs
+    catkin_make
+
+## Launching Apollo alongside the simulator
+
+Here we only describe only a simple case of driving from point A to point B using Apollo and the simulator. 
+
+To launch apollo, first launch and enter a container as described in the previous steps.
+
+* To start Apollo:
+
+        ./scripts/bootstrap.sh
+
+    Note: you may receive errors about dreamview not being build if you do not run the script from the `/apollo` directory.
+
+* Launch rosbridge:
+
+        ./scripts/rosbridge.sh
+
+* Run the LG SVL Simulator (see instructions in the [simulator repository](https://github.com/lgsvl/simulator))
+    - Enable GPS, IMU, LIDAR, HD Mode, and Telephota Camera.
+    - (optional) Enable traffic.
+
+* Open Apollo dreamview in a browser by navigating to: `localhost:8888`
+    - Select the `LG SVL 1080` vehicle and `San Francisco` map in the top right corner.
+    - Open the **Module Controller** tap (on the left bar).
+    - Enable **Localization**, **Perception**, **Planning**, **Prediction**, **Routing**, and **Control**.
+    - Navigate to the **Route Editing** tab.
+    - Select a destination by clicking on a lane line and clicking **Submit Route**.
+    - Watch the vehicle navigate to the destination. 
