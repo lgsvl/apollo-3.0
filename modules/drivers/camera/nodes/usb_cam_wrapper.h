@@ -1,5 +1,6 @@
 /******************************************************************************
  * Modification Copyright 2018 The Apollo Authors. All Rights Reserved.
+ * Modifications Copyright (c) 2018 LG Electronics, Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
