@@ -166,16 +166,12 @@ if [ -z "${DOCKER_REPO}" ]; then
     DOCKER_REPO=apolloauto/apollo
 fi
 
-if [ "$INCHINA" == "yes" ]; then
-    DOCKER_REPO=registry.docker-cn.com/apolloauto/apollo
-fi
-
 if [ "$LOCAL_IMAGE" == "yes" ] && [ -z "$VERSION_OPT" ]; then
     VERSION="local_dev"
 fi
 
 
-IMG=${DOCKER_REPO}:$VERSION
+IMG=lgsvl/apollo:latest
 
 function local_volumes() {
     # Apollo root and bazel cache dirs are required.
@@ -229,7 +225,7 @@ function main(){
         display="${DISPLAY}"
     fi
 
-    setup_device
+    setup_deviceDOCKER_CMD
 
     USER_ID=$(id -u)
     GRP=apollo
