@@ -1,6 +1,8 @@
 # LG Silicon Valley Lab Apollo Fork
 This repository is a fork of [Apollo](https://github.com/ApolloAuto/apollo) maintained by the LG Electronics Silicon Valley Lab which has modified and configured to facilitate use with [LG's Automotive Simulator](https://github.com/lgsvl/simulator).
 
+**The software and source code in this repository are intended only for use with LG Automotive Simulator and *should not* be used in a real vehicle.**
+
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
@@ -113,6 +115,7 @@ To launch apollo, first launch and enter a container as described in the previou
         ./scripts/rosbridge.sh
 
 * Run the LG SVL Simulator (see instructions in the [simulator repository](https://github.com/lgsvl/simulator))
+    - Select the `San Francisco` map and the `XE-Rigged-apollo` vehicle.
     - Enable GPS, IMU, LIDAR, HD Mode, and Telephota Camera.
     - (optional) Enable traffic.
 
@@ -122,4 +125,5 @@ To launch apollo, first launch and enter a container as described in the previou
     - Enable **Localization**, **Perception**, **Planning**, **Prediction**, **Routing**, and **Control**.
     - Navigate to the **Route Editing** tab.
     - Select a destination by clicking on a lane line and clicking **Submit Route**.
-    - Watch the vehicle navigate to the destination. 
+    - Watch the vehicle navigate to the destination.
+    - To stop the docker container run the `dev_stop.sh` script in `apollo/docker/scripts` in a new terminal (not in the docker container).
