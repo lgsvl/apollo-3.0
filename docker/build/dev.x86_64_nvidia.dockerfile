@@ -8,7 +8,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
        python \
        libxext-dev \
        x11proto-gl-dev \
-       mesa-utils
+       mesa-utils \
+       gdbserver
 
 WORKDIR /opt/libglvnd
 RUN git clone --branch=v1.0.0 https://github.com/NVIDIA/libglvnd.git . && \
