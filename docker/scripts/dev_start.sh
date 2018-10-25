@@ -253,7 +253,7 @@ function main(){
     docker pull ${YOLO3D_VOLUME_IMAGE}
     docker run -it -d --rm --name ${YOLO3D_VOLUME} ${YOLO3D_VOLUME_IMAGE}
 
-    ROS_DOMAIN_ID=`python -c "import random; print(random.getrandbits(31))"`
+    ROS_DOMAIN_ID=`python -c "import random; print(random.getrandbits(30))"`
 
     info "Starting docker container \"apollo_dev\" ..."
 
