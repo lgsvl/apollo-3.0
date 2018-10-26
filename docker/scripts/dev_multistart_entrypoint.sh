@@ -10,8 +10,8 @@ trap on_exit SIGINT SIGTERM
 
 /apollo/scripts/bootstrap.sh start
 
-if [ ! -d /apollo/lgsvl-rosbridge/ros_pkgs/devel ]; then
-  pushd /apollo/lgsvl-rosbridge/ros_pkgs
+if [ ! -d /apollo/ros_pkgs/devel ]; then
+  pushd /apollo/ros_pkgs
   echo $PATH
   catkin_make
   popd

@@ -32,7 +32,8 @@ DEFAULT_MAPS=(
 )
 MAP_VOLUME_CONF=""
 
-IMG=${DOCKER_REPO}:$VERSION
+IMG="lgsvl/apollo"
+
 
 function local_volumes() {
     # Apollo root and bazel cache dirs are required.
