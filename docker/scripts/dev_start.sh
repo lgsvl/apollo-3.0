@@ -98,8 +98,8 @@ check_agreement
 
 VOLUME_VERSION="latest"
 DEFAULT_MAPS=(
-  sunnyvale_big_loop
-  sunnyvale_loop
+#  sunnyvale_big_loop
+#  sunnyvale_loop
 )
 MAP_VOLUME_CONF=""
 
