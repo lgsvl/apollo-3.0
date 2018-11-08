@@ -3,6 +3,16 @@
 - Generating navigation data from bag and 
 - Manually sending the data to /apollo/navigation topic 
 
+## Simplified way:
+- record pose into rosbag: 
+	- `cd /apollo/modules/tools/navigator`
+	- `rosbag record /apollo/localization/pose `
+	- Driving from start to end
+- extract and smooth path:
+	- `bash extract_and_smooth.sh <generated_bag_file>`
+- send path:
+	- `python navigator.py <smoothed path file>`
+
 ### Step 1: In dev docker, extract path data from bags
 
 ```
