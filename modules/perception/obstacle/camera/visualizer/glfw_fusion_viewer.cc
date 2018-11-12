@@ -2308,7 +2308,7 @@ void GLFWFusionViewer::draw_objects2d(
                << obj->track_id;
         glColor3ub(255, 0, 0);
       } else {
-        glColor3ub(0, 0, 0);
+        glColor3ub(0, 255, 255);
       }
 
       glLineWidth(4);
