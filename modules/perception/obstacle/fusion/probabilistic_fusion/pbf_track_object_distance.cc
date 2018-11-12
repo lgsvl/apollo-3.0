@@ -251,7 +251,7 @@ float PbfTrackObjectDistance::ComputeDistanceAngleMatchProb(
   float fobject_dist = static_cast<float>(fcenter.norm());
   double svelocity = sobj->velocity.norm();
   double fvelocity = fobj->velocity.norm();
-  if (svelocity > 0.0 && fvelocity > 0.0) {
+  if (svelocity > 0.1 && fvelocity > 0.1) {
     float cos_distance =
         sobj->velocity.dot(fobj->velocity) / (svelocity * fvelocity);
     if (cos_distance < FLAGS_pbf_distance_speed_cos_diff) {
