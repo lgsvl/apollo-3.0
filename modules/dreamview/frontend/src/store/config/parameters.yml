@@ -37,10 +37,10 @@ ground:
     tileRange: 4
   san_francisco:
     mpp: 0.125
-    xres: 14336
-    yres: 13312
-    xorigin: 552960
-    yorigin: 4182592
+    xres: 15360
+    yres: 16384
+    xorigin: 553024
+    yorigin: 4182528
     type: default # default or tile
     tileRange: 4
 planning:
