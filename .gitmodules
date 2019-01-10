@@ -7,3 +7,6 @@
 [submodule "modules/calibration/data"]
 	path = modules/calibration/data
 	url = ../apollo-vehicle.git
+[submodule "ros_pkgs/src/lgsvl_msgs"]
+	path = ros_pkgs/src/lgsvl_msgs
+	url = ../lgsvl_msgs.git
