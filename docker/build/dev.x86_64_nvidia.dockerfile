@@ -74,7 +74,8 @@ RUN pip install --upgrade \
     pymongo \
     zope.interface \
     pillow \
-    twisted
+    twisted \
+    empy
 
 RUN touch /usr/local/lib/python2.7/dist-packages/zope/__init__.py
 RUN touch /usr/local/lib/python2.7/dist-packages/google/__init__.py
