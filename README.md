@@ -110,11 +110,11 @@ To launch apollo, first launch and enter a container as described in the previou
 
     Note: you may receive errors about dreamview not being build if you do not run the script from the `/apollo` directory.
 
-* Launch rosbridge:
+* Launch rosbridge (inside docker container):
 
         ./scripts/rosbridge.sh
 
-* Run the LG SVL Simulator (see instructions in the [simulator repository](https://github.com/lgsvl/simulator))
+* Run the LG SVL Simulator outside of docker. See instructions in the [simulator repository](https://github.com/lgsvl/simulator)
     - Select the `San Francisco` map and the `XE-Rigged-apollo` vehicle.
     - Enable GPS, IMU, LIDAR, HD Mode, and Telephota Camera.
     - (optional) Enable traffic.
