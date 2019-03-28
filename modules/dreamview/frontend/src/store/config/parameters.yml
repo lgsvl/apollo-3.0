@@ -43,6 +43,14 @@ ground:
     yorigin: 4182528
     type: default # default or tile
     tileRange: 4
+  prospect_sv:
+    mpp: 0.125
+    xres: 3072
+    yres: 3072
+    xorigin: 600256
+    yorigin: 4135360
+    type: default # default or tile
+    tileRange: 4
 planning:
   # The minimum interval between two consecutive
   minInterval: 0.1
