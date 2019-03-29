@@ -286,6 +286,8 @@ function main(){
         --shm-size 2G \
         --pid=host \
         -v /dev/null:/dev/raw1394 \
+        -e ROS_MASTER_URI=http://172.17.0.1:11311 \
+        -e ROS_IP=172.17.0.1 \
         $IMG \
         /bin/bash
 
