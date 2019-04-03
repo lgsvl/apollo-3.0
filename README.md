@@ -116,8 +116,8 @@ To launch apollo, first launch and enter a container as described in the previou
 
 * Run the LG SVL Simulator outside of docker. See instructions in the [simulator repository](https://github.com/lgsvl/simulator)
     - Select the `San Francisco` map and the `XE-Rigged-apollo` vehicle.
-    - Enable GPS, IMU, LIDAR, HD Mode, and Telephota Camera.
-    - (optional) Enable traffic.
+    - Enable GPS, IMU, LIDAR, and Telephoto Camera.
+    - (optional) Enable traffic and pedestrians.
 
 * Open Apollo dreamview in a browser by navigating to: `localhost:8888`
     - Select the `LG SVL 1080` vehicle and `San Francisco` map in the top right corner.
