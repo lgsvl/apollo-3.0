@@ -99,4 +99,4 @@ print("origin_northing:", origin_northing, "origin_easting:", origin_easting)
 # Compute Scale for Unity
 scale_x = num_northings*128 / 10.
 scale_y = num_eastings*128 / 10.
-print("The scale for X .show()nd Z of the combined png in Unity is:", scale_x, scale_y)
+print("The scale for X and Z of the combined png in Unity is:", scale_x, scale_y)
