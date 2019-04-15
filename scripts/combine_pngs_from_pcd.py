@@ -81,7 +81,7 @@ for northing in range(min_northing, max_northing+1):
 
 os.chdir(map_root_folder)
 
-# new_im = new_im.transpose(Image.FLIP_TOP_BOTTOM)
+new_im = new_im.transpose(Image.FLIP_TOP_BOTTOM)
 new_im.save('background.png')
 new_im.save('background.jpg')
 
