@@ -26374,7 +26374,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_1"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -26459,7 +26459,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_3"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -26544,7 +26544,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_5"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -26635,7 +26635,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_9"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -26726,7 +26726,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_13"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -26817,7 +26817,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_17"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -26908,7 +26908,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_21"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -26999,7 +26999,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_25"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27090,7 +27090,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_29"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27181,7 +27181,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_33"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27272,7 +27272,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_37"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27360,7 +27360,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_40"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27448,7 +27448,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_43"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27539,7 +27539,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_47"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27630,7 +27630,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_51"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27718,7 +27718,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_54"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27806,7 +27806,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_57"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27894,7 +27894,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_60"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -27982,7 +27982,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_63"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28067,7 +28067,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_65"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28152,7 +28152,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_67"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28237,7 +28237,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_69"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28322,7 +28322,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_71"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28410,7 +28410,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_74"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28495,7 +28495,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_76"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28580,7 +28580,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_78"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28662,7 +28662,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_79"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
@@ -28747,7 +28747,7 @@ signal {
   overlap_id {
     id: "signal_lane_overlap_81"
   }
-  type: MIX_3_VERTICAL
+  type: MIX_3_HORIZONTAL
   stop_line {
     segment {
       line_segment {
