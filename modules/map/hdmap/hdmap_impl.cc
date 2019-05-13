@@ -598,29 +598,29 @@ int HDMapImpl::GetRoadBoundaries(
       continue;
     }
     road_section_id_set.insert(unique_id);
-    // const auto road_ptr = GetRoadById(road_id);
-    // CHECK_NOTNULL(road_ptr);
-    // if (road_ptr->has_junction_id()) {
-    //   const Id junction_id = road_ptr->junction_id();
-    //   if (junction_id_set.count(junction_id.id()) > 0) {
-    //     continue;
-    //   }
-    //   junction_id_set.insert(junction_id.id());
-    //   JunctionBoundaryPtr junction_boundary_ptr(new JunctionBoundary());
-    //   junction_boundary_ptr->junction_info = GetJunctionById(junction_id);
-    //   CHECK_NOTNULL(junction_boundary_ptr->junction_info);
-    //   junctions->push_back(junction_boundary_ptr);
-    // } else {
-    //   RoadROIBoundaryPtr road_boundary_ptr(new RoadROIBoundary());
-    //   road_boundary_ptr->mutable_id()->CopyFrom(road_ptr->id());
-    //   for (const auto& section : road_ptr->sections()) {
-    //     if (section.id().id() == section_id.id()) {
-    //       road_boundary_ptr->add_road_boundaries()->CopyFrom(
-    //           section.boundary());
-    //     }
-    //   }
-    //   road_boundaries->push_back(road_boundary_ptr);
-    // }
+    const auto road_ptr = GetRoadById(road_id);
+    CHECK_NOTNULL(road_ptr);
+    if (road_ptr->has_junction_id()) {
+      const Id junction_id = road_ptr->junction_id();
+      if (junction_id_set.count(junction_id.id()) > 0) {
+        continue;
+      }
+      junction_id_set.insert(junction_id.id());
+      JunctionBoundaryPtr junction_boundary_ptr(new JunctionBoundary());
+      junction_boundary_ptr->junction_info = GetJunctionById(junction_id);
+      CHECK_NOTNULL(junction_boundary_ptr->junction_info);
+      junctions->push_back(junction_boundary_ptr);
+    } else {
+      RoadROIBoundaryPtr road_boundary_ptr(new RoadROIBoundary());
+      road_boundary_ptr->mutable_id()->CopyFrom(road_ptr->id());
+      for (const auto& section : road_ptr->sections()) {
+        if (section.id().id() == section_id.id()) {
+          road_boundary_ptr->add_road_boundaries()->CopyFrom(
+              section.boundary());
+        }
+      }
+      road_boundaries->push_back(road_boundary_ptr);
+    }
   }
 
   return 0;
