@@ -115,12 +115,11 @@ To launch apollo, first launch and enter a container as described in the previou
         ./scripts/rosbridge.sh
 
 * Run the LG SVL Simulator outside of docker. See instructions in the [simulator repository](https://github.com/lgsvl/simulator)
-    - Select the `San Francisco` map and the `XE-Rigged-apollo` vehicle.
-    - Enable GPS, IMU, LIDAR, and Telephoto Camera.
-    - (optional) Enable traffic and pedestrians.
+    - Create a Simulation with the `BorregasAve` map and the `Jaguar2015XE (Apollo 3.0)` vehicle.
+    - Enter `localhost:9090` for the Bridge Connection String
 
 * Open Apollo dreamview in a browser by navigating to: `localhost:8888`
-    - Select the `LG SVL 1080` vehicle and `San Francisco` map in the top right corner.
+    - Select the `Jaguar2015XE` vehicle and `BorregasAve` map in the top right corner.
     - Open the **Module Controller** tap (on the left bar).
     - Enable **Localization**, **Perception**, **Planning**, **Prediction**, **Routing**, and **Control**.
     - Navigate to the **Route Editing** tab.
