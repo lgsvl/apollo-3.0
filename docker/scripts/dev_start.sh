@@ -257,14 +257,20 @@ function main(){
 
     info "Starting docker container \"apollo_dev\" ..."
 
-    DOCKER_CMD="nvidia-docker"
-    if ! [ -x "$(command -v ${DOCKER_CMD})" ]; then
+    if [[ $DOCKER_VERSION -ge "19" ]] && ! type nvidia-docker; then
         DOCKER_CMD="docker"
+        USE_GPU=1
+        GPUS="--gpus all"
+    else
+        DOCKER_CMD="nvidia-docker"
+        USE_GPU=1
+        GPUS=""
     fi
 
     ${DOCKER_CMD} run -it \
         -d \
         --privileged \
+        ${GPUS} \
         --name apollo_dev \
         ${MAP_VOLUME_CONF} \
         --volumes-from ${LOCALIZATION_VOLUME} \
