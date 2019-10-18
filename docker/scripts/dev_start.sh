@@ -257,6 +257,8 @@ function main(){
 
     info "Starting docker container \"apollo_dev\" ..."
 
+    DOCKER_VERSION=$(docker version --format '{{.Client.Version}}' | cut -d'.' -f1)
+
     if [[ $DOCKER_VERSION -ge "19" ]] && ! type nvidia-docker; then
         DOCKER_CMD="docker"
         USE_GPU=1
