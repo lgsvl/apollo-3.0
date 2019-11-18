@@ -114,7 +114,7 @@ To launch apollo, first launch and enter a container as described in the previou
 
         ./scripts/rosbridge.sh
 
-* Run the LG SVL Simulator outside of docker. See instructions in the [simulator repository](https://github.com/lgsvl/simulator)
+* Run the LG SVL Simulator outside of docker. See instructions in the [simulator repository](https://www.lgsvlsimulator.com/docs/getting-started/#simulator-instructions)
     - Create a Simulation with the `BorregasAve` map and the `Jaguar2015XE (Apollo 3.0)` vehicle.
     - Enter `localhost:9090` for the Bridge Connection String
 
