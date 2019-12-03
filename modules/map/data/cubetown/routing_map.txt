@@ -234,14 +234,14 @@ node {
 }
 node {
   lane_id: "lane_6"
-  length: 12.04971981048584
-  cost: 26.351013986649335
+  length: 11.996748924255371
+  cost: 26.323094761586347
   central_curve {
     segment {
       line_segment {
         point {
-          x: 592669.905002594
-          y: 4134468.2932872772
+          x: 592669.84697341919
+          y: 4134468.3557958603
         }
         point {
           x: 592670.36861801147
@@ -262,11 +262,11 @@ node {
       }
       s: 0
       start_position {
-        x: 592669.905002594
-        y: 4134468.2932872772
+        x: 592669.84697341919
+        y: 4134468.3557958603
         z: 0
       }
-      length: 12.04971981048584
+      length: 11.996748924255371
     }
   }
   is_virtual: false
@@ -790,16 +790,16 @@ node {
 }
 node {
   lane_id: "lane_16"
-  length: 157.49807739257812
+  length: 167.13973999023438
   left_out {
     start {
       s: 0
     }
     end {
-      s: 157.49807739257812
+      s: 167.13973999023438
     }
   }
-  cost: 83.0120955609434
+  cost: 88.093901194214766
   central_curve {
     segment {
       line_segment {
@@ -883,6 +883,10 @@ node {
           x: 592669.87059402466
           y: 4134458.7141571045
         }
+        point {
+          x: 592669.84697341919
+          y: 4134468.3557958603
+        }
       }
       s: 0
       start_position {
@@ -890,7 +894,7 @@ node {
         y: 4134468.2120132446
         z: 0
       }
-      length: 157.49807739257812
+      length: 167.13973999023438
     }
   }
   is_virtual: false
@@ -1113,6 +1117,18 @@ edge {
 edge {
   from_lane_id: "lane_15"
   to_lane_id: "lane_9"
+  cost: 0
+  direction_type: FORWARD
+}
+edge {
+  from_lane_id: "lane_16"
+  to_lane_id: "lane_6"
+  cost: 0
+  direction_type: FORWARD
+}
+edge {
+  from_lane_id: "lane_16"
+  to_lane_id: "lane_11"
   cost: 0
   direction_type: FORWARD
 }
