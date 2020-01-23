@@ -22,7 +22,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "${DIR}/.."
 
 # Make sure supervisord has correct coredump file limit.
-ulimit -c unlimited
+ulimit -c 0
 
 source "${DIR}/apollo_base.sh"
 
